@@ -1,0 +1,5 @@
+import urllib
+import urllib.reques
+
+url = 'http://apis.data.go.kr/B552657/ErmctInfoInqireService/getEgytListInfoInqire'
+queryParams = '?' + 'ServiceKey='+'fDs8VW%2BvtwQA8Q9LhBW%2BT2ETVBWWJaITjKfpzDsNJO8ugDsvdboInI16ZD295Txxtxwhc4G3PwMAvxd%2FWvz2gQ%3D%3D'+'numOfRows'+'999'
