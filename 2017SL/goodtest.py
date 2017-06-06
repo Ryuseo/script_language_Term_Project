@@ -132,6 +132,7 @@ def SearchHospitalSubj():
 def PrintList():
     global list
 
+
     for i in list:
         print("=" * 60)
         print("Name : ", i['Name'])
