@@ -12,6 +12,7 @@ def main():
             print("TellNum : ", hospital.findtext("dutyTel1"))
 
 
+
             print("Subject : ",  test2)
             print("Address : ", hospital.findtext("dutyAddr"))
 
