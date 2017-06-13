@@ -19,6 +19,7 @@ sortType = 'nameup'
 list = []
 
 
+
 def InitRenderText():
     global RenderText
     RenderTextScrollbar = Scrollbar(window)
