@@ -92,7 +92,7 @@ def SearchHospitalAddr():
     list1.insert(temp, "========================================")
 
     def CurSelect(evt):
-
+        global window, image_byt, image_b64, photo, label
         mapValue = str(list1.get(list1.curselection()))
         print(mapValue)
         encText = urllib.parse.quote(mapValue)
@@ -115,7 +115,7 @@ def SearchHospitalAddr():
             print(test2[42],test2[44])
             # print(test['point'])
             # test2 = json.loads(test)
-            webbrowser.open(url2)
+
 
         else:
             print("Error Code:" + rescode)
@@ -166,6 +166,45 @@ def SearchHospitalSubj():
         temp += 1
 
     list1.insert(temp, "========================================")
+
+    def CurSelect(evt):
+        global window, image_byt, image_b64, photo, label
+        mapValue = str(list1.get(list1.curselection()))
+        print(mapValue)
+        encText = urllib.parse.quote(mapValue)
+        print(encText)
+        url = "https://openapi.naver.com/v1/map/geocode?query=" + encText
+        request = urllib.request.Request(url)
+        request.add_header("X-Naver-Client-Id", client_id)
+        request.add_header("X-Naver-Client-Secret", client_secret)
+        response = urllib.request.urlopen(request)
+        rescode = response.getcode()
+        if (rescode == 200):
+            response_body = response.read()
+            # webbrowser.open(url)
+            test = response_body.decode('utf-8')
+            print(test)
+            test2 = test.split()
+            index1 = test.find("x")
+            print(index1)
+            url2 = UrlBuilder(test2[42], test2[44])  # 광주 광역시
+            print(test2[42], test2[44])
+            # print(test['point'])
+            # test2 = json.loads(test)
+
+
+        else:
+            print("Error Code:" + rescode)
+        image_byt = urllib.request.urlopen(url2).read()
+        image_b64 = base64.encodebytes(image_byt)
+        photo = PhotoImage(data=image_b64)
+
+        label = Label(window, image=photo, height=400, width=400)
+
+        label.place(x=330, y=0)
+
+    list1.bind('<<ListboxSelect>>', CurSelect)
+    print(mapValue)
     PrintList()
 def PrintList():
     global list
