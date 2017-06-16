@@ -1,6 +1,4 @@
 import smtplib
-import mimetypes
-from email.mime.base import MIMEBase
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import xml.etree.ElementTree as etree
@@ -12,11 +10,11 @@ def sendMail():
     host = "smtp.gmail.com"
     port = "587"
     html = ""
-    title = input("title")
-    sendID = input("send id")
-    reciveID = input("recive id")
-    msgtext = input("messge")
-    passwd = input("password")
+    title = "asdf"#input("title")
+    sendID = "rkd4apf@gmail.com"#input("send id")
+    reciveID = "rkd4apf@gmail.com"#input("recive id")
+    msgtext = "zxcv"#input("messge")
+    passwd = "momo8591!"#input("password")
     html = MakeHtmlDoc(MakeList())
 
     # Message container를 생성합니다.
@@ -62,7 +60,7 @@ def InsertList(val):
     dic = {'Name': '', 'TellNum': '', 'Subject': '', 'Address': ''}
     dic['Name'] = val.findtext("dutyName")
     dic['TellNum'] = val.findtext("dutyTel1")
-    dic['Subject'] = val.findtext("dgidIdName")
+    dic['Subject'] = str(val.findtext("dgidIdName"))
     dic['Address'] = val.findtext("dutyAddr")
 
     mailList.append(dic)
@@ -155,24 +153,43 @@ def MakeHtmlDoc(list):
         # create bold element
         b = newdoc.createElement('b')
         # create text node
-        ibsnText = newdoc.createTextNode("Name:" + item['Name'])
-        b.appendChild(ibsnText)
+        nameText = newdoc.createTextNode("Name:" + item['Name'])
+        b.appendChild(nameText)
 
         body.appendChild(b)
 
         # BR 태그 (엘리먼트) 생성.
         br = newdoc.createElement('br')
 
-        body.appendChild(br)
+        #body.appendChild(br)
 
         # create title Element
         p = newdoc.createElement('p')
         # create text node
-        titleText = newdoc.createTextNode("Address:" + item['Address'])
-        p.appendChild(titleText)
+        addrText = newdoc.createTextNode("Address:" + item['Address'])
+        p.appendChild(addrText)
 
         body.appendChild(p)
-        body.appendChild(br)  # line end
+        # BR 태그 (엘리먼트) 생성.
+        br = newdoc.createElement('br')
+
+        # create title Element
+        p = newdoc.createElement('p')
+        # create text node
+        subText = newdoc.createTextNode("Subject:" + item['Subject'])
+        p.appendChild(subText)
+
+        body.appendChild(p)
+        # BR 태그 (엘리먼트) 생성.
+        br = newdoc.createElement('br')
+
+        # create title Element
+        p = newdoc.createElement('p')
+        # create text node
+        telText = newdoc.createTextNode("TellNum:" + item['TellNum'])
+        p.appendChild(telText)
+
+        body.appendChild(p)
 
         # append Body
     top_element.appendChild(body)
